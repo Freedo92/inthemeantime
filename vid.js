@@ -14,3 +14,18 @@ function onYouTubeApiLoad() {
     gapi.client.setApiKey('AIzaSyDNYoIpIAKuz9A8EoIvAs3wVghpix_cJzI');
     
 }
+
+// Look for a video with the specified time.
+function search() {
+	// Create a search.list() API call.
+    var request = gapi.client.youtube.search.list({
+        part: 'id'
+    });
+	
+	request.execute(onSearchResponse);
+}
+
+// Called automatically with the response of the YouTube API request.
+function onSearchResponse(response) {
+    showResponse(response);
+}
