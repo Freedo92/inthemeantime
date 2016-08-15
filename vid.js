@@ -1,7 +1,7 @@
 // Helper function to display JavaScript value on HTML page.
 function showResponse(response) {
     var responseString = JSON.stringify(response, '', 2);
-    document.getElementById('response').innerHTML += responseString;
+    console.log(responseString);
 }
 
 // Called automatically when JavaScript client library is loaded.
@@ -15,11 +15,32 @@ function onYouTubeApiLoad() {
     
 }
 
+$(function() {
+    var searchField = $('#search-input');
+
+    $('#search-form').submit(function(e) {
+        e.preventDefault();
+    });
+});
+
+function timeToDuration(minutes) {
+	if (minutes < 4) {
+		return 'short';
+	} else if (minutes >= 4 || minutes <= 20) {
+		return 'medium';
+	} else {
+		return 'long';
+	}
+}
+
 // Look for a video with the specified time.
 function search() {
-	// Create a search.list() API call.
+	var videoDuration = $('#search-input').val();
+	
+	// Create a search.list() API call. TODO: change snippet to id
     var request = gapi.client.youtube.search.list({
-        part: 'id'
+        part: 'snippet',
+		videoDuration: timeToDuration(videoDuration),
     });
 	
 	request.execute(onSearchResponse);
