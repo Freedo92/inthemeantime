@@ -70,10 +70,10 @@ function buildVideoList(response) {
 		console.log("Video id list built successfully: " + videoIds);
 
 		var request = gapi.client.youtube.videos.list({
-			id: videoIds,
-			part: 'id,fileDetails'
+			id: videoIds.join(','),
+			part: 'id' // got rid of fileDetails
 		});
-
+		console.log()
 		request.execute(showResponse);
 	}
 }
