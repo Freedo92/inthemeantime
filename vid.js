@@ -46,7 +46,7 @@ var videoDuration = null;
 function search(data) {
 	console.log("Searching with: " + data.Word);
 	videoDuration = $('#search-input').val()
-	// Create a search.list() API call. TODO: change snippet to id
+	// Create a search.list() API call.
 	var request = gapi.client.youtube.search.list({
 		type: 'video',
 		part: 'id',
@@ -61,7 +61,7 @@ function search(data) {
 
 // Called automatically with the response of the YouTube API request.
 function buildVideoList(response) {
-	if ('error' in response) {
+	/* if ('error' in response) {
 		displayMessage(response.error.message);
 	} else {
 		var videoIds = $.map(response.items, function(item) {
@@ -74,7 +74,8 @@ function buildVideoList(response) {
 		});
 
 		request.execute(showResponse);
-	}
+	} */
+	console.log("It got to buildVideoList")
 }
 
 // Helper function to display JavaScript value on HTML page.
