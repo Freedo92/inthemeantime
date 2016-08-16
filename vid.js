@@ -75,5 +75,5 @@ function showResponse(response) {
 			this.fileDetails.durationMs >= videoDuration-30000) {
 			console.log(this.id);
 		} else {return;}
-	}
+	});
 }
