@@ -51,7 +51,7 @@ function search(data) {
 		videoDuration: timeToDuration(videoDuration)
     });
 	
-	request.execute(locateVideo);
+	request.execute(buildVideoList);
 }
 
 // Called automatically with the response of the YouTube API request.
