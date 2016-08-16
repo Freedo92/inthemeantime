@@ -61,24 +61,21 @@ function search(data) {
 
 // Called automatically with the response of the YouTube API request.
 function buildVideoList(response) {
-	/* if ('error' in response) {
+	if ('error' in response) {
 		displayMessage(response.error.message);
 	} else {
 		var videoIds = $.map(response.items, function(item) {
 			return item.id.videoId; // .snippet. was here too
 		});
 
-		var request = gapi.client.youtube.videos.list({
+		console.log("Video list built successfully");
+		/* var request = gapi.client.youtube.videos.list({
 			id: videoIds.join(','),
 			part: 'id,fileDetails'
 		});
 
-		request.execute(showResponse);
-	} */
-	console.log("It got to buildVideoList");
-
-	var responseString = JSON.stringify(response, '', 2);
-    console.log(responseString);
+		request.execute(showResponse); */
+	}
 }
 
 // Helper function to display JavaScript value on HTML page.
