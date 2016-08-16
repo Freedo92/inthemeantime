@@ -67,7 +67,7 @@ function buildVideoList(response) {
 		var videoIds = $.map(response.items, function(item) {
 			return item.id.videoId; // .snippet. was here too
 		});
-		console.log("Video list built successfully");
+		console.log("Video id list built successfully: " + videoIds);
 
 		var request = gapi.client.youtube.videos.list({
 			id: videoIds.join(','),
