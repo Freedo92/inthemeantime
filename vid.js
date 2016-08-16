@@ -30,6 +30,21 @@ function timeToDuration(minutes) {
 	}
 }
 
+function isoToSeconds(input) {
+	var reptms = /^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/;
+	var hours = 0, minutes = 0, seconds = 0, totalseconds;
+
+	if (reptms.test(input)) {
+		var matches = reptms.exec(input);
+		if (matches[1]) hours = Number(matches[1]);
+		if (matches[2]) minutes = Number(matches[2]);
+		if (matches[3]) seconds = Number(matches[3]);
+		totalseconds = hours * 3600  + minutes * 60 + seconds;
+	}
+
+	return (totalseconds);
+}
+
 function RandomWord() {
 	$.ajax({
 		type: "GET",
@@ -71,7 +86,7 @@ function buildVideoList(response) {
 
 		var request = gapi.client.youtube.videos.list({
 			id: videoIds.join(','),
-			part: 'id' // got rid of fileDetails
+			part: 'id,contentDetails'
 		});
 		console.log()
 		request.execute(showResponse);
@@ -81,8 +96,8 @@ function buildVideoList(response) {
 // Helper function to display JavaScript value on HTML page.
 function showResponse(response) {
 	$.each(response.items, function() {
-		if (this.fileDetails.durationMs <= videoDuration+30000 || 
-			this.fileDetails.durationMs >= videoDuration-30000) {
+		if (isoToSeconds(this.contentDetails.duration) <= videoDuration+60 || 
+			isoToSeconds(this.contentDetails.duration) >= videoDuration-60) {
 			console.log(this.id);
 		} else {return;}
 	});
