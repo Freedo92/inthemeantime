@@ -119,11 +119,11 @@ function showResponse(response) {
 	var topResultId = null;
 
 	var fudgeFactor = null;
-	if (desiredDuration <= 20) {
+	if (desiredDuration < 20) {
 		fudgeFactor = 60;
-	} else if (desiredDuration <= 30) {
+	} else if (desiredDuration < 30) {
 		fudgeFactor = 150;
-	} else if (desiredDuration <= 60) {
+	} else if (desiredDuration < 60) {
 		fudgeFactor = 300;
 	} else {
 		fudgeFactor = 600;
