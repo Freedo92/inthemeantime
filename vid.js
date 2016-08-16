@@ -44,6 +44,7 @@ var videoDuration = null;
 
 // Look for a video with the specified time.
 function search(data) {
+	console.log("Searching with: " + data.Word);
 	videoDuration = $('#search-input').val()
 	// Create a search.list() API call. TODO: change snippet to id
 	var request = gapi.client.youtube.search.list({
@@ -55,7 +56,7 @@ function search(data) {
 	});
 	
 	request.execute(buildVideoList);
-	console.log("Completed search: " + data);
+	console.log("Completed search");
 }
 
 // Called automatically with the response of the YouTube API request.
