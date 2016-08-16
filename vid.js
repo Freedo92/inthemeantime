@@ -45,22 +45,32 @@ function isoToSeconds(input) {
 	return (totalseconds);
 }
 
+var videoDuration = null;
+var t = 0;
 function RandomWord() {
+	// var wordLength = null;
+	videoDuration = $('#search-input').val()
 	$.ajax({
 		type: "GET",
 		url: "http://randomword.setgetgo.com/get.php",
 		dataType: "jsonp",
+		// len: wordLength,
 		jsonpCallback: 'search'
 	});
 	console.log("Random word received");
-}
 
-var videoDuration = null;
+	if(t == 1) {
+		alert('Goddamn, slow down. I have only have so many API calls, geez...');
+	}
+	t=1;
+	setTimeout(function(){
+		t=0;
+	}, 3000)
+}
 
 // Look for a video with the specified time.
 function search(data) {
 	console.log("Searching with: " + data.Word);
-	videoDuration = $('#search-input').val()
 	// Create a search.list() API call.
 	var request = gapi.client.youtube.search.list({
 		type: 'video',
@@ -96,7 +106,12 @@ function buildVideoList(response) {
 
 // Helper function to display JavaScript value on HTML page.
 function showResponse(response) {
-	console.log("Desired duration: " + videoDuration + " minutes/" + (videoDuration*60) + " seconds")
+	if (response.items[0] == undefined) {
+		console.log("No results with that length. Will search again.");
+		RandomWord();
+		return;
+	}
+	console.log("Desired duration: " + videoDuration + " minutes/" + (videoDuration*60) + " seconds");
 	var durationInSeconds = null;
 	var topResultId = null;
 	$.each(response.items, function() {
