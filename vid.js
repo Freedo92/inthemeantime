@@ -88,19 +88,20 @@ function buildVideoList(response) {
 			id: videoIds.join(','),
 			part: 'id,contentDetails'
 		});
-		console.log()
+
 		request.execute(showResponse);
 	}
 }
 
 // Helper function to display JavaScript value on HTML page.
 function showResponse(response) {
-	console.log("Desired duration: " + videoDuration)
+	console.log("Desired duration: " + videoDuration + " minutes/" + (videoDuration*60) + " seconds")
+	var durationInSeconds = null;
 	$.each(response.items, function() {
-		var durationInSeconds = isoToSeconds(this.contentDetails.duration) 
+		durationInSeconds = isoToSeconds(this.contentDetails.duration);
 		if (durationInSeconds <= ((videoDuration*60)+60) || 
 			durationInSeconds >= ((videoDuration*60)-60)) {
-			console.log(this.id + " : " + this.contentDetails.duration);
+			console.log(this.id + " : " + this.contentDetails.duration + "/" + durationInSeconds + " seconds");
 		} else {return;}
 	});
 }
