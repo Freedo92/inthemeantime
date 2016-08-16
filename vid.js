@@ -75,7 +75,10 @@ function buildVideoList(response) {
 
 		request.execute(showResponse);
 	} */
-	console.log("It got to buildVideoList")
+	console.log("It got to buildVideoList");
+
+	var responseString = JSON.stringify(response, '', 2);
+    console.log(responseString);
 }
 
 // Helper function to display JavaScript value on HTML page.
