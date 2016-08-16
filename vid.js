@@ -33,13 +33,10 @@ function timeToDuration(minutes) {
 }
 
 function RandomWord() {
-    $.ajax({
-        type: "GET",
-        url: "http://randomword.setgetgo.com/get.php",
-        dataType: "jsonp"
-    }).done(function(data) {
-    	return data.Word;
-    });
+    $.get( "http://randomword.setgetgo.com/get.php", (function( data ) {
+	    	return data.Word;
+		});
+    );
 }
 
 // Look for a video with the specified time.
