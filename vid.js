@@ -67,14 +67,14 @@ function buildVideoList(response) {
 		var videoIds = $.map(response.items, function(item) {
 			return item.id.videoId; // .snippet. was here too
 		});
-
 		console.log("Video list built successfully");
-		/* var request = gapi.client.youtube.videos.list({
+
+		var request = gapi.client.youtube.videos.list({
 			id: videoIds.join(','),
 			part: 'id,fileDetails'
 		});
 
-		request.execute(showResponse); */
+		request.execute(showResponse);
 	}
 }
 
