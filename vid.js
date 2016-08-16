@@ -103,7 +103,7 @@ function showResponse(response) {
 		if (durationInSeconds <= ((videoDuration*60)+60) && 
 			durationInSeconds >= ((videoDuration*60)-60)) {
 			console.log(this.id + " : " + this.contentDetails.duration + "/" + durationInSeconds + " seconds");
-			break;
+			return;
 		} else {return;}
 	});
 }
