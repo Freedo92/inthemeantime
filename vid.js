@@ -32,24 +32,26 @@ function timeToDuration(minutes) {
 	}
 }
 
-function RandomWord() {
-	var word;
-    $.get( "http://randomword.setgetgo.com/get.php", function( data ) {
-    	word = data.Word;
-    });
+var word;
 
-    return word;
+function RandomWord() {
+    $.ajax({
+        type: "GET",
+        url: "http://randomword.setgetgo.com/get.php",
+        dataType: "jsonp",
+        jsonpCallback: 'search'
+    });
 }
 
 // Look for a video with the specified time.
-function search(word) {
+function search(data) {
 	var videoDuration = $('#search-input').val();
 	
 	// Create a search.list() API call. TODO: change snippet to id
     var request = gapi.client.youtube.search.list({
     	type: 'video',
         part: 'snippet',
-        q: RandomWord(),
+        q: data,
 		videoDuration: timeToDuration(videoDuration)
     });
 	
