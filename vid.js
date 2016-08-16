@@ -95,10 +95,12 @@ function buildVideoList(response) {
 
 // Helper function to display JavaScript value on HTML page.
 function showResponse(response) {
+	console.log("Desired duration: " + videoDuration)
 	$.each(response.items, function() {
-		if (isoToSeconds(this.contentDetails.duration) <= videoDuration+60 || 
-			isoToSeconds(this.contentDetails.duration) >= videoDuration-60) {
-			console.log(this.id);
+		var durationInSeconds = isoToSeconds(this.contentDetails.duration) 
+		if (durationInSeconds <= ((videoDuration*60)+60) || 
+			durationInSeconds >= ((videoDuration*60)-60) {
+			console.log(this.id + " : " + this.contentDetails.duration);
 		} else {return;}
 	});
 }
