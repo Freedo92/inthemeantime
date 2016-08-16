@@ -35,7 +35,7 @@ function timeToDuration(minutes) {
 function RandomWord() {
     $.get( "http://randomword.setgetgo.com/get.php", { dataType: "jsonp"} )
 		.done(function( data ) {
-	    return data.Word;
+	    return data;
 	});
 }
 
