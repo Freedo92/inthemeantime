@@ -63,6 +63,7 @@ function search(data) {
 	videoDuration = $('#search-input').val()
 	// Create a search.list() API call.
 	var request = gapi.client.youtube.search.list({
+		maxResults=25,
 		type: 'video',
 		part: 'id',
 		q: data.Word,
@@ -82,7 +83,7 @@ function buildVideoList(response) {
 		var videoIds = $.map(response.items, function(item) {
 			return item.id.videoId; // .snippet. was here too
 		});
-		console.log("Video id list built successfully: " + videoIds);
+		console.log("Video id list built successfully");
 
 		var request = gapi.client.youtube.videos.list({
 			id: videoIds.join(','),
@@ -102,6 +103,7 @@ function showResponse(response) {
 		if (durationInSeconds <= ((videoDuration*60)+60) && 
 			durationInSeconds >= ((videoDuration*60)-60)) {
 			console.log(this.id + " : " + this.contentDetails.duration + "/" + durationInSeconds + " seconds");
+			break;
 		} else {return;}
 	});
 }
