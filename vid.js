@@ -45,11 +45,11 @@ function isoToSeconds(input) {
 	return (totalseconds);
 }
 
-var videoDuration = null;
+var desiredDuration = null;
 var t = 0;
 function RandomWord() {
 	// var wordLength = null;
-	videoDuration = $('#search-input').val()
+	desiredDuration = $('#search-input').val()
 	$.ajax({
 		type: "GET",
 		url: "http://randomword.setgetgo.com/get.php",
@@ -78,7 +78,7 @@ function search(data) {
 		part: 'id',
 		q: data.Word,
 		videoEmbeddable: true,
-		videoDuration: timeToDuration(videoDuration)
+		desiredDuration: timeToDuration(desiredDuration)
 	});
 	
 	request.execute(buildVideoList);
@@ -111,13 +111,25 @@ function showResponse(response) {
 		RandomWord();
 		return;
 	}
-	console.log("Desired duration: " + videoDuration + " minutes/" + (videoDuration*60) + " seconds");
+	console.log("Desired duration: " + desiredDuration + " minutes/" + (desiredDuration*60) + " seconds");
 	var durationInSeconds = null;
 	var topResultId = null;
+
+	var fudgeFactor = null;
+	if (desiredDuration <= 20) {
+		fudgeFactor = 60;
+	} else if (desiredDuration <= 30) {
+		fudgeFactor = 150;
+	} else if (desiredDuration <= 60) {
+		fudgeFactor = 300;
+	} else {
+		fudgeFactor = 600;
+	}
+
 	$.each(response.items, function() {
 		durationInSeconds = isoToSeconds(this.contentDetails.duration);
-		if (durationInSeconds <= ((videoDuration*60)+60) && 
-			durationInSeconds >= ((videoDuration*60)-60)) {
+		if (durationInSeconds <= ((desiredDuration*60)+fudgeFactor) && 
+			durationInSeconds >= ((desiredDuration*60)-fudgeFactor)) {
 			console.log(this.id + " : " + this.contentDetails.duration + "/" + durationInSeconds + " seconds");
 			topResultId = this.id
 			return false;
