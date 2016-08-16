@@ -1,9 +1,3 @@
-// Helper function to display JavaScript value on HTML page.
-function showResponse(response) {
-    var responseString = JSON.stringify(response, '', 2);
-    console.log(responseString);
-}
-
 // Called automatically when JavaScript client library is loaded.
 function onClientLoad() {
     gapi.client.load('youtube', 'v3', onYouTubeApiLoad);
@@ -32,8 +26,6 @@ function timeToDuration(minutes) {
 	}
 }
 
-var word;
-
 function RandomWord() {
     $.ajax({
         type: "GET",
@@ -50,15 +42,21 @@ function search(data) {
 	// Create a search.list() API call. TODO: change snippet to id
     var request = gapi.client.youtube.search.list({
     	type: 'video',
-        part: 'snippet',
+        part: 'videoDuration',
         q: data.Word,
 		videoDuration: timeToDuration(videoDuration)
     });
 	
-	request.execute(onSearchResponse);
+	request.execute(locateVideo);
 }
 
 // Called automatically with the response of the YouTube API request.
-function onSearchResponse(response) {
+function locateVideo(response) {
     showResponse(response);
+}
+
+// Helper function to display JavaScript value on HTML page.
+function showResponse(response) {
+    var responseString = JSON.stringify(response, '', 2);
+    console.log(responseString);
 }
