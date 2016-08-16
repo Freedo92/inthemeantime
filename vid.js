@@ -63,8 +63,8 @@ function search(data) {
 	videoDuration = $('#search-input').val()
 	// Create a search.list() API call.
 	var request = gapi.client.youtube.search.list({
-		maxResults: 50,
 		type: 'video',
+		maxResults: 50,
 		part: 'id',
 		q: data.Word,
 		videoEmbeddable: true,
