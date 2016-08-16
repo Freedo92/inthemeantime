@@ -33,9 +33,12 @@ function timeToDuration(minutes) {
 }
 
 function RandomWord() {
+	var word;
     $.get( "http://randomword.setgetgo.com/get.php", function( data ) {
-    	return data.Word;
+    	word = data.Word;
     });
+
+    return word;
 }
 
 // Look for a video with the specified time.
