@@ -48,6 +48,12 @@ function isoToSeconds(input) {
 var desiredDuration = null;
 var t = 0;
 function RandomWord() {
+	if(t == 1) {
+		alert('Goddamn, slow down. I have only have so many API calls, geez...');
+		return;
+	}
+	t=1;
+
 	// var wordLength = null;
 	desiredDuration = $('#search-input').val()
 	$.ajax({
@@ -59,12 +65,9 @@ function RandomWord() {
 	});
 	console.log("Random word received");
 
-	if(t == 1) {
-		alert('Goddamn, slow down. I have only have so many API calls, geez...');
-	}
-	t=1;
 	setTimeout(function(){
 		t=0;
+		
 	}, 3000)
 }
 
