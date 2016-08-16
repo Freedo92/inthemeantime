@@ -106,7 +106,7 @@ function buildVideoList(response) {
 
 // Helper function to display JavaScript value on HTML page.
 function showResponse(response) {
-	if (response.items[0] == undefined) {
+	if (response.items.length == 0) {
 		console.log("No results with that length. Will search again.");
 		RandomWord();
 		return;
