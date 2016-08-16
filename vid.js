@@ -51,7 +51,7 @@ function search(data) {
     var request = gapi.client.youtube.search.list({
     	type: 'video',
         part: 'snippet',
-        q: data,
+        q: data.Word,
 		videoDuration: timeToDuration(videoDuration)
     });
 	
