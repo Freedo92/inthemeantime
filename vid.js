@@ -98,12 +98,15 @@ function buildVideoList(response) {
 function showResponse(response) {
 	console.log("Desired duration: " + videoDuration + " minutes/" + (videoDuration*60) + " seconds")
 	var durationInSeconds = null;
+	var topResultId = null;
 	$.each(response.items, function() {
 		durationInSeconds = isoToSeconds(this.contentDetails.duration);
 		if (durationInSeconds <= ((videoDuration*60)+60) && 
 			durationInSeconds >= ((videoDuration*60)-60)) {
 			console.log(this.id + " : " + this.contentDetails.duration + "/" + durationInSeconds + " seconds");
-			return;
+			topResultId = this.id
+			return false;
 		} else {return;}
 	});
+	document.getElementById("frame").setAttribute("src", ("https://www.youtube.com/embed/" + topResultId));
 }

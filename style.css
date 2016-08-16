@@ -30,4 +30,9 @@ input[type=submit] {
 	background-color: #ABB7B7; 
 	color: black;
 	border: none;
-	padding: 10px 16px;}
+	padding: 10px 16px;
+}
+
+form {
+	margin-bottom: 1em;
+}
