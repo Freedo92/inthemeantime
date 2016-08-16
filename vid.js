@@ -57,7 +57,7 @@ function search(data) {
 // Called automatically with the response of the YouTube API request.
 function buildVideoList(response) {
 	var videoIds = $.map(response.items, function(item) {
-		return item.snippet.resourceId.videoId;
+		return item.snippet.id.videoId;
 	});
 
     var request = gapi.client.youtube.videos.list({
