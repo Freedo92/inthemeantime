@@ -1,3 +1,5 @@
+var apiKey = 'AIzaSyDNYoIpIAKuz9A8EoIvAs3wVghpix_cJzI';
+
 // Called automatically when JavaScript client library is loaded.
 function onClientLoad() {
     gapi.client.load('youtube', 'v3', onYouTubeApiLoad);
@@ -5,7 +7,7 @@ function onClientLoad() {
 
 // Called automatically when YouTube API interface is loaded (see line 9).
 function onYouTubeApiLoad() {
-    gapi.client.setApiKey('AIzaSyDNYoIpIAKuz9A8EoIvAs3wVghpix_cJzI');
+    gapi.client.setApiKey(apiKey);
 }
 
 $(function() {
@@ -35,7 +37,7 @@ function RandomWord() {
     });
 }
 
-var videoDuration= null;
+var videoDuration = null;
 
 // Look for a video with the specified time.
 function search(data) {
@@ -43,7 +45,7 @@ function search(data) {
 	// Create a search.list() API call. TODO: change snippet to id
     var request = gapi.client.youtube.search.list({
     	type: 'video',
-        part: 'contentDetails',
+        part: 'snippet',
         q: data.Word,
         videoEmbeddable: true,
 		videoDuration: timeToDuration(videoDuration)
@@ -53,12 +55,25 @@ function search(data) {
 }
 
 // Called automatically with the response of the YouTube API request.
-function locateVideo(response) {
-    showResponse(response);
+function buildVideoList(response) {
+	var videoIds = $.map(response.items, function(item) {
+		return item.snippet.resourceId.videoId;
+	});
+
+    var request = gapi.client.youtube.videos.list({
+    	id: videoIds.join(','),
+    	part: 'id,fileDetails'
+    });
+
+    request.execute(showResponse);
 }
 
 // Helper function to display JavaScript value on HTML page.
 function showResponse(response) {
-    var responseString = JSON.stringify(response, '', 2);
-    console.log(responseString);
+    $.each(response.items, function() {
+		if (this.fileDetails.durationMs <= videoDuration+30000 || 
+			this.fileDetails.durationMs >= videoDuration-30000) {
+			console.log(this.id);
+		} else {return;}
+	}
 }
