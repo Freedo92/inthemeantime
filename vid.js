@@ -99,7 +99,7 @@ function showResponse(response) {
 	$.each(response.items, function() {
 		var durationInSeconds = isoToSeconds(this.contentDetails.duration) 
 		if (durationInSeconds <= ((videoDuration*60)+60) || 
-			durationInSeconds >= ((videoDuration*60)-60) {
+			durationInSeconds >= ((videoDuration*60)-60)) {
 			console.log(this.id + " : " + this.contentDetails.duration);
 		} else {return;}
 	});
