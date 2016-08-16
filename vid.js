@@ -35,15 +35,17 @@ function RandomWord() {
     });
 }
 
+var videoDuration= null;
+
 // Look for a video with the specified time.
 function search(data) {
-	var videoDuration = $('#search-input').val();
-	
+	 videoDuration = $('#search-input').val()
 	// Create a search.list() API call. TODO: change snippet to id
     var request = gapi.client.youtube.search.list({
     	type: 'video',
-        part: 'videoDuration',
+        part: 'contentDetails',
         q: data.Word,
+        videoEmbeddable: true,
 		videoDuration: timeToDuration(videoDuration)
     });
 	
