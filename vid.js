@@ -73,7 +73,7 @@ function RandomWord() {
 
 // Look for a video with the specified time.
 function search(data) {
-	console.log("Searching with: " + data.Word "with length " + timeToDuration(desiredDuration));
+	console.log("Searching with: " + data.Word + "with length " + timeToDuration(desiredDuration));
 	// Create a search.list() API call.
 	var request = gapi.client.youtube.search.list({
 		type: 'video',
