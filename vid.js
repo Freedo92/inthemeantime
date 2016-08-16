@@ -39,8 +39,7 @@ function search() {
 	// Create a search.list() API call. TODO: change snippet to id
     var request = gapi.client.youtube.search.list({
         part: 'snippet',
-        q: 'test'
-		//videoDuration: timeToDuration(videoDuration),
+		videoDuration: timeToDuration(videoDuration)
     });
 	
 	request.execute(onSearchResponse);
