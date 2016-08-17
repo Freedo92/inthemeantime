@@ -48,8 +48,10 @@ function isoToSeconds(input) {
 var desiredDuration = null;
 var t = 0;
 function RandomWord() {
+	document.getElementById("heading").innerHTML = "Searching...";
 	if(t == 1) {
 		alert('Goddamn, slow down. I have only have so many API calls, geez...');
+		document.getElementById("heading").innerHTML = "inthemeanti.me";
 		return;
 	}
 	t=1;
@@ -92,6 +94,7 @@ function search(data) {
 function buildVideoList(response) {
 	if ('error' in response) {
 		displayMessage(response.error.message);
+		document.getElementById("heading").innerHTML = "inthemeanti.me";
 	} else {
 		var videoIds = $.map(response.items, function(item) {
 			return item.id.videoId; // .snippet. was here too
@@ -142,4 +145,5 @@ function showResponse(response) {
 	}
 
 	document.getElementById("frame").setAttribute("src", ("https://www.youtube.com/embed/" + topResultId));
+	document.getElementById("heading").innerHTML = "inthemeanti.me";
 }
