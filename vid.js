@@ -109,11 +109,6 @@ function buildVideoList(response) {
 
 // Helper function to display JavaScript value on HTML page.
 function showResponse(response) {
-	if (response.items.length == 0) {
-		console.log("No results with that length. Will search again.");
-		RandomWord();
-		return;
-	}
 	console.log("Desired duration: " + desiredDuration + " minutes/" + (desiredDuration*60) + " seconds");
 	var durationInSeconds = null;
 	var topResultId = null;
@@ -138,5 +133,13 @@ function showResponse(response) {
 			return false;
 		} else {return;}
 	});
+
+	if (topResultId == null) {
+		console.log("No results with that length. Will search again.");
+		t = 0;
+		RandomWord();
+		return;
+	}
+
 	document.getElementById("frame").setAttribute("src", ("https://www.youtube.com/embed/" + topResultId));
 }
