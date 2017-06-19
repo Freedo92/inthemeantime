@@ -60,7 +60,7 @@ function RandomWord() {
 	desiredDuration = $('#search-input').val()
 	$.ajax({
 		type: "GET",
-		url: "http://randomword.setgetgo.com/get.php",
+		url: "http://setgetgo.com/randomword/get.php",
 		dataType: "jsonp",
 		// len: wordLength,
 		jsonpCallback: 'search'
